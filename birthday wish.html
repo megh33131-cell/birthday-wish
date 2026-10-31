@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Sister!</title>
+<style>
+  :root { --pink:#ff4f91; --purple:#8057d8; --cream:#fff8f3; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; min-height:100vh; overflow-x:hidden; color:#49264f;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: radial-gradient(circle at top left,#ffe0ef,transparent 38%),
+                radial-gradient(circle at bottom right,#e6dcff,transparent 40%),
+                linear-gradient(135deg,#fff8f3,#ffeaf3 55%,#f0eaff);
+    display:flex; align-items:center; justify-content:center; padding:30px 16px;
+  }
+  .sparkle { position:fixed; color:#ffb6cf; pointer-events:none; animation: twinkle 3s infinite ease-in-out; }
+  @keyframes twinkle { 0%,100%{opacity:.25;transform:scale(.7)} 50%{opacity:1;transform:scale(1.25)} }
+  .card {
+    position:relative; z-index:2; width:min(680px,100%); padding:42px 28px 36px;
+    text-align:center; border:2px solid rgba(255,255,255,.9); border-radius:30px;
+    background:rgba(255,255,255,.78); box-shadow:0 22px 70px rgba(122,69,130,.18);
+    backdrop-filter:blur(10px); animation: arrive 1s ease both;
+  }
+  @keyframes arrive { from{opacity:0;transform:translateY(25px) scale(.97)} to{opacity:1;transform:none} }
+  .topline { color:var(--pink); font-weight:bold; letter-spacing:4px; text-transform:uppercase; font-size:.78rem; }
+  h1 { margin:12px 0 8px; font-size:clamp(2.5rem,8vw,4.8rem); line-height:1.03; color:var(--purple); }
+  h1 span { display:block; color:var(--pink); }
+  .subtitle { font-size:1.12rem; line-height:1.6; color:#765a78; margin:14px auto 20px; max-width:490px; }
+  .name { display:inline-block; color:#e83e85; border-bottom:2px dashed #ff9fc3; padding:0 7px 3px; }
+  .cake { font-size:clamp(5rem,18vw,8rem); margin:8px 0 4px; display:inline-block; filter:drop-shadow(0 9px 8px #e7a9c4); animation: bob 2.2s ease-in-out infinite; }
+  @keyframes bob { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-10px) rotate(2deg)} }
+  .message {
+    display:none; margin:22px auto 0; max-width:510px; padding:20px;
+    border-radius:18px; background:#fff0f6; color:#68416b; line-height:1.75;
+    animation: arrive .6s ease both;
+  }
+  .message.show { display:block; }
+  button {
+    border:0; border-radius:999px; padding:15px 27px; margin-top:18px;
+    color:white; font-size:1rem; font-weight:bold; letter-spacing:.3px;
+    background:linear-gradient(100deg,var(--pink),var(--purple));
+    box-shadow:0 9px 20px rgba(194,75,145,.25); cursor:pointer; transition:.2s;
+  }
+  button:hover { transform:translateY(-3px); box-shadow:0 13px 25px rgba(194,75,145,.32); }
+  .footer { margin-top:24px; font-size:.85rem; color:#a17ba0; }
+  .balloon { position:fixed; bottom:-150px; width:54px; height:68px; border-radius:50% 50% 45% 45%;
+    opacity:.7; z-index:1; animation: floatUp 11s linear infinite; }
+  .balloon:after { content:""; position:absolute; width:1px; height:75px; background:#b58da9; top:66px; left:50%; }
+  @keyframes floatUp { from{transform:translateY(0) rotate(-8deg)} to{transform:translateY(-125vh) rotate(10deg)} }
+  .confetti { position:fixed; top:-15px; width:9px; height:14px; z-index:5; animation: fall 3.8s linear forwards; }
+  @keyframes fall { to{transform:translateY(110vh) rotate(800deg);opacity:.8} }
+  @media(max-width:480px){ .card{padding:34px 19px 28px} .topline{letter-spacing:2px} }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="topline">A little celebration for someone special</div>
+  <h1>Happy Birthday <span>Dear Sister!</span></h1>
+  <p class="subtitle">Today is all about celebrating wonderful <span class="name" id="sisterName">Sister</span> 💗</p>
+  <div class="cake" aria-label="Birthday cake">🎂</div>
+  <p class="subtitle">May your day sparkle with happiness, laughter and lovely surprises!</p>
+  <button id="wishButton">Open your birthday surprise ✨</button>
+  <div class="message" id="message">
+    <strong>To my amazing sister, 💕</strong><br>
+    Thank you for filling life with fun, care and unforgettable memories.
+    No matter how much we tease or argue, you will always be very special to me.
+    May this new year bring you beautiful opportunities, good health, success
+    and countless reasons to smile. Keep shining just the way you are!<br><br>
+    <strong>Lots of love. Happy Birthday! 🎉</strong>
+  </div>
+  <div class="footer">Made with love, just for you ♡</div>
+</div>
+<script>
+  // Change "Sister" below to your sister's name.
+  const sisterName = "Sister";
+  document.getElementById("sisterName").textContent = sisterName;
+
+  const colors = ["#ff78aa", "#a78bfa", "#ffd166", "#7bdff2", "#ff9f68"];
+  for (let i=0; i<18; i++) {
+    const b = document.createElement("div");
+    b.className = "balloon";
+    b.style.left = (Math.random()*100) + "vw";
+    b.style.background = colors[i % colors.length];
+    b.style.animationDelay = (Math.random()*10) + "s";
+    b.style.animationDuration = (9 + Math.random()*7) + "s";
+    b.style.transform = `scale(${.65 + Math.random()*.55})`;
+    document.body.appendChild(b);
+  }
+  for (let i=0; i<24; i++) {
+    const s = document.createElement("div");
+    s.className = "sparkle"; s.textContent = "✦";
+    s.style.left = Math.random()*100 + "vw";
+    s.style.top = Math.random()*100 + "vh";
+    s.style.fontSize = (10 + Math.random()*18) + "px";
+    s.style.animationDelay = Math.random()*3 + "s";
+    document.body.appendChild(s);
+  }
+  function celebrate() {
+    for (let i=0; i<110; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.left = Math.random()*100 + "vw";
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.animationDelay = Math.random()*.8 + "s";
+      c.style.transform = `rotate(${Math.random()*360}deg)`;
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 5000);
+    }
+  }
+  document.getElementById("wishButton").addEventListener("click", () => {
+    document.getElementById("message").classList.add("show");
+    document.getElementById("wishButton").textContent = "Celebrate again! 🎊";
+    celebrate();
+  });
+</script>
+</body>
+</html>
